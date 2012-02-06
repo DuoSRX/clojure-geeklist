@@ -112,6 +112,20 @@
   [status]
   (make-request "micros" [] :POST {:status status}))
 
+(defn reply-to-micro
+  "Create a micro replying to another micro"
+  [micro-id status]
+  (make-request "micros" [] :POST {:status status
+                                   :type "micro"
+                                   :in_reply_to micro-id}))
+
+(defn reply-to-card
+  "Create a micro replying to a card"
+  [card-id status]
+  (make-request "micros" [] :POST {:status status
+                                   :type "card"
+                                   :in_reply_to card-id}))
+
 (defn highfive
   "Highfive an item (user, card ... etc)"
   [type id]
