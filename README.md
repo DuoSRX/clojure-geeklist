@@ -13,12 +13,12 @@ FIXME: write
   (:require [clojure-geeklist.core as :geeklist]
             [clojure-oauth as :oauth]))
 
-(def consumer (oauth/make-consumer "consumer-key"
-                                   "consumer-secret"
-                                   "http://sandbox-api.geekli.st/oauth/request_token"
-                                   "http://sandbox.geekli.st/oauth/access_token"
-                                   "http://sandbox-api.geekli.st/oauth/authorize"
-                                   :hmac-sha1))
+(def consumer (geeklist/make-consumer "consumer-key"
+                                      "consumer-secret"
+                                      "http://sandbox-api.geekli.st/oauth/request_token"
+                                      "http://sandbox.geekli.st/oauth/access_token"
+                                      "http://sandbox-api.geekli.st/oauth/authorize"
+                                      :hmac-sha1))
 
 ; Get a specific user
 (geeklist/user "username")

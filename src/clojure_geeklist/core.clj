@@ -5,17 +5,21 @@
 
 (def base-url "http://sandbox-api.geekli.st/v1/")
 
-(def oauth-consumer-key "")
-(def oauth-consumer-secret "")
-(def oauth-access-token "")
-(def oauth-access-token-secret "")
+(def ^:dynamic oauth-consumer-key "")
+(def ^:dynamic oauth-consumer-secret "")
+(def ^:dynamic oauth-access-token "")
+(def ^:dynamic oauth-access-token-secret "")
 
-(def consumer (oauth/make-consumer oauth-consumer-key
-                                   oauth-consumer-secret
-                                   "http://sandbox-api.geekli.st/oauth/request_token"
-                                   "http://sandbox.geekli.st/oauth/access_token"
-                                   "http://sandbox-api.geekli.st/oauth/authorize"
-                                   :hmac-sha1))
+(def ^:dynamic consumer nil)
+
+(defn make-consumer
+  [consumer-key consumer-secret]
+  (oauth/make-consumer consumer-key
+                       consumer-secret
+                       "http://sandbox-api.geekli.st/oauth/request_token"
+                       "http://sandbox.geekli.st/oauth/access_token"
+                       "http://sandbox-api.geekli.st/oauth/authorize"
+                       :hmac-sha1))
 
 (defn make-credentials
   [url method params]
@@ -91,7 +95,7 @@
 (defn micro
   "Get a specific micro"
   [id]
-  (make-request "micros/%s" [id] :GET options))
+  (make-request "micros/%s" [id] :GET))
 
 (defn user-micros
   "Get the authenticated user micros"
