@@ -26,27 +26,63 @@
                      url
                      params))
 
+; TODO: move this into a macro ?
 (defn make-request
-  [endpoint params method query]
+  [endpoint params method & [query]]
   (let [url (str base-url (apply format endpoint params))
         credentials (make-credentials url method query)
         parameters (http/map->params {:use-expect-continue false})]
+    ; TODO: DRY this up
     (if (= :GET method)
-        (http/get url :query credentials :parameters parameters :as :json)
-        (http/post url :query (merge credentials query) :parameters parameters :as :json))))
+      (http/get url
+                :query (merge credentials query)
+                :parameters parameters
+                :as :json)
+      (http/post url
+                 :query (merge credentials query)
+                 :parameters parameters
+                 :as :json))))
 
 (defn user
-  [id]
-  (make-request "users/%s" [id] :GET {}))
+  ([] (make-request "user" [] :GET))
+  ([id] (make-request "users/%s" [id] :GET)))
+
+(defn following
+  [id & [options]]
+  (make-request "users/%s/following" [id] :GET options))
 
 (defn user-cards
+  [id & [options]]
+  (make-request "users/%s/cards" [id] :GET options))
+
+(defn cards
+  [& [options]]
+  (make-request "user/cards" [] :GET options))
+
+(defn card
   [id]
-  (make-request "users/%s/cards" [id] :GET {}))
+  (make-request "cards/%s" [id] :GET))
+
+(defn create-card
+  [headline]
+  (make-request "cards" [] :POST {:headline headline}))
+
+(defn micro
+  [id]
+  (make-request "micros/%s" [id] :GET options))
+
+(defn user-micros
+  [& [options]]
+  (make-request "user/micros" [] :GET options))
+
+(defn micros
+  [id & [options]]
+  (make-request "users/%s/micros" [id] :GET options))
 
 (defn create-micro
   [status]
   (make-request "micros" [] :POST {:status status}))
 
-(defn create-card
-  [headline]
-  (make-request "cards" [] :POST {:headline headline}))
+(defn highfive
+  [type id]
+  (make-request "highfive" [] :POST {:type type :gfk id}))
