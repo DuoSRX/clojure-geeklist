@@ -58,6 +58,16 @@
   [id & [options]]
   (make-request "users/%s/following" [id] :GET options))
 
+(defn follow
+  "Follow an user"
+  [id]
+  (make-request "follow" [] :POST {:user id :action "follow"}))
+
+(defn unfollow
+  "Unfollow an user"
+  [id]
+  (make-request "follow" [] :POST {:user id}))
+
 (defn user-cards
   "Get the given user cards"
   [id & [options]]
