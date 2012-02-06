@@ -2,9 +2,7 @@
 
 A simple wrapper to the Geeklist API in clojure.
 
-## Usage
-
-FIXME: write
+See [clj-oauth documentation](http://github.com/mattrepl/clj-oauth) for basic usage of the oauth library.
 
 ## Example
 
