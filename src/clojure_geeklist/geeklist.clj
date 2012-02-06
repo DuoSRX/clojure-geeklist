@@ -1,4 +1,4 @@
-(ns clojure-geeklist.core
+(ns geeklist
   (:use [clojure.data.json :only [read-json]])
   (:require [oauth.client :as oauth]
             [com.twinql.clojure.http :as http]))
