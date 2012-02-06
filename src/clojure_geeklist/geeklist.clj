@@ -130,3 +130,18 @@
   "Highfive an item (user, card ... etc)"
   [type id]
   (make-request "highfive" [] :POST {:type type :gfk id}))
+
+(defn activity
+  "Get the authenticated user activity"
+  [& [options]]
+  (make-request "user/activity" [] :GET options))
+
+(defn user-activity
+  "Get a specific user activity"
+  [id & [options]]
+  (make-request "users/%s/activity" [id] :GET options))
+
+(defn all-activity
+  "Get all the activity"
+  [& [options]]
+  (make-request "activity" [] :GET options))
