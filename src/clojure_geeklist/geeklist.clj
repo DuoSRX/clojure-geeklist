@@ -5,12 +5,16 @@
 
 (def base-url "http://sandbox-api.geekli.st/v1/")
 
-(def ^:dynamic oauth-consumer-key "")
-(def ^:dynamic oauth-consumer-secret "")
-(def ^:dynamic oauth-access-token "")
-(def ^:dynamic oauth-access-token-secret "")
+(def ^:dynamic *access-token* "")
+(def ^:dynamic *access-token-secret* "")
+(def ^:dynamic *consumer* nil)
 
-(def ^:dynamic consumer nil)
+(defmacro with-oauth
+  [consumer access-token access-token-secret & body]
+  `(binding [*consumer* ~consumer
+             *access-token* ~access-token
+             *access-token-secret* ~access-token-secret]
+     (do ~@body)))
 
 (defn make-consumer
   [consumer-key consumer-secret]
@@ -23,14 +27,13 @@
 
 (defn make-credentials
   [url method params]
-  (oauth/credentials consumer
-                     oauth-access-token
-                     oauth-access-token-secret
+  (oauth/credentials *consumer*
+                     *access-token*
+                     *access-token-secret*
                      method
                      url
                      params))
 
-; TODO: move this into a macro ?
 (defn make-request
   [endpoint params method & [query]]
   (let [url (str base-url (apply format endpoint params))

@@ -16,17 +16,13 @@ See [clj-oauth documentation](http://github.com/mattrepl/clj-oauth) for basic us
             [clojure-oauth :as oauth]))
 
 (def consumer (geeklist/make-consumer "consumer-key"
-                                      "consumer-secret"
-                                      "http://sandbox-api.geekli.st/oauth/request_token"
-                                      "http://sandbox.geekli.st/oauth/access_token"
-                                      "http://sandbox-api.geekli.st/oauth/authorize"
-                                      :hmac-sha1))
+                                      "consumer-secret"))
 
 ; Get a specific user
-(geeklist/user "username")
-
-; Get 15 followers for a specific user
-(geeklist/followers "username" {:count 15})
+(geeklist/with-oauth consumer
+                     "access-token"
+                     "access-token-secret"
+    (geeklist/user "username"))
 ```
 
 ## License
