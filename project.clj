@@ -1,5 +1,6 @@
 (defproject clojure-geeklist "1.0.0-SNAPSHOT"
   :description "Geeklist client API"
+  :url "http://github.com/DuoSRX/clojure-geeklist"
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [org.clojure/data.json "0.1.2"]
                  [org.clojars.tavisrudd/clj-oauth "1.3.1-SNAPSHOT"]

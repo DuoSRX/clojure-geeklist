@@ -2,6 +2,10 @@
 
 A simple wrapper to the Geeklist API in clojure.
 
+## Installation
+
+This library is on clojars so you can simply add `[clojure-geeklist "1.0.0-SNAPSHOT"]` to your dependencies in your project.clj.
+
 See [clj-oauth documentation](http://github.com/mattrepl/clj-oauth) for basic usage of the oauth library.
 
 ## Example
