@@ -1,5 +1,5 @@
-(ns clojure-geeklist.test.core
-  (:use [clojure-geeklist.core])
+(ns clojure-geeklist.test.client
+  (:use clojure-geeklist.client)
   (:use [clojure.test]))
 
 (deftest replace-me ;; FIXME: write

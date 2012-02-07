@@ -12,7 +12,7 @@ See [clj-oauth documentation](http://github.com/mattrepl/clj-oauth) for basic us
 
 ```clojure
 (ns whatever
-  (:require [geeklist :as geeklist]
+  (:require [clojure-geeklist.client :as geeklist]
             [clojure-oauth :as oauth]))
 
 (def consumer (geeklist/make-consumer "consumer-key"
